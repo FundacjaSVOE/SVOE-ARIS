@@ -15,17 +15,31 @@ from datetime import datetime
 
 
 def load_config():
-    """Load ARIS configuration using dynamic base path resolution."""
-    # Получаем абсолютный путь к папке, где находится сам скрипт collector.py
+    """Load ARIS configuration searching in probable directories."""
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    
-    # Файл конфигурации находится в папке docs на уровень выше
-    config_path = os.path.join(base_dir, "..", "docs", "project.yaml")
-    config_path = os.path.normpath(config_path)
+    repo_root = os.path.abspath(os.path.join(base_dir, ".."))
 
-    if not os.path.exists(config_path):
-        raise FileNotFoundError(f"Configuration file not found at: {config_path}")
+    # Варианты возможных путей к конфигу
+    possible_paths = [
+        os.path.join(repo_root, "docs", "project.yaml"),
+        os.path.join(repo_root, "config", "project.yaml"),
+        os.path.join(repo_root, "project.yaml"),
+    ]
 
+    config_path = None
+    for path in possible_paths:
+        if os.path.exists(path):
+            config_path = path
+            break
+
+    if not config_path:
+        print(f"[ERROR] Configuration file 'project.yaml' not found!")
+        print(f"[ERROR] Searched locations:")
+        for path in possible_paths:
+            print(f" - {path}")
+        raise FileNotFoundError("Unable to locate project.yaml")
+
+    print(f"[INFO] Loading configuration from: {config_path}")
     with open(config_path, "r", encoding="utf-8") as file:
         return yaml.safe_load(file)
 
@@ -38,7 +52,7 @@ def main():
     try:
         config = load_config()
     except Exception as e:
-        print(f"Error loading configuration: {e}")
+        print(f"[FATAL] Error loading configuration: {e}")
         sys.exit(1)
 
     project = config.get("project", {})
