@@ -1,7 +1,16 @@
 project:
   name: SVOE-ARIS
+  full_name: Animal Rescue Intelligence System
   version: 0.1.0
-  description: Animal Rescue Intelligence System
+  organization: Fundacja SVOE
+  description: >
+    AI-powered automation system for animal protection
+    content creation and publishing.
+
+mission:
+  description: >
+    Create, translate and distribute useful content
+    about animal rescue and care.
 
 languages:
   - pl
@@ -23,4 +32,11 @@ sources:
     - Poland
     - USA
     - Germany
-    - Russian-speaking
+    - Russian-speaking countries
+
+modules:
+  - collector
+  - analyzer
+  - writer
+  - translator
+  - publisher
