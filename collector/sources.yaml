@@ -1,0 +1,16 @@
+sources:
+
+  - name: Animal News
+    type: rss
+    country: USA
+    url: ""
+
+  - name: Animal Protection
+    type: rss
+    country: Germany
+    url: ""
+
+  - name: Animal Rescue
+    type: rss
+    country: Poland
+    url: ""
