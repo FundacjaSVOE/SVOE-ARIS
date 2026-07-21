@@ -1,0 +1,26 @@
+project:
+  name: SVOE-ARIS
+  version: 0.1.0
+  description: Animal Rescue Intelligence System
+
+languages:
+  - pl
+  - ru
+  - en
+  - de
+
+content:
+  morning:
+    type: animal_protection_news
+    time: "09:00"
+
+  evening:
+    type: animal_care_tips
+    time: "19:00"
+
+sources:
+  countries:
+    - Poland
+    - USA
+    - Germany
+    - Russian-speaking
