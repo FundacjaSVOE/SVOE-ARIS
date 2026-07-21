@@ -23,6 +23,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Debug file structure
+        run: |
+          echo "=== Current directory contents ==="
+          ls -la
+          echo "=== Docs directory contents ==="
+          ls -la docs/ || echo "docs directory missing"
+
       - name: Run ARIS Collector
         run: |
           python collector/collector.py
